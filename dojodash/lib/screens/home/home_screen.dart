@@ -1,5 +1,13 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
+import 'package:dojodash/screens/home/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:yeet/yeet.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -10,6 +18,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<Uint8List> _generatePdf(PdfPageFormat format, String title) async {
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: format,
+        build: (context) => pw.Placeholder(),
+      ),
+    );
+
+    return pdf.save();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +40,25 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
               icon: Icon(Icons.person), onPressed: () => context.yeet('/maze'))
         ]),
-        body: FutureBuilder(
-            future: Future.delayed(Duration(seconds: 3), () => 'Cheese'),
+        body: FutureBuilder<Response>(
+            future: Dio().get('http://localhost:5000/dashboard'),
             builder: (_, data) {
               if (data.hasData) {
-                return Text('It was: ${data.data}');
+                final pdf = pw.Document();
+
+                pdf.addPage(pw.Page(
+                    pageFormat: PdfPageFormat.a4,
+                    build: (pw.Context context) {
+                      return pw.Center(
+                          child: pw.Text('Cheeseplease')); // Center
+                    })); // Page
+
+                // final file = File("matthijspdf.pdf");
+                // pdf.save().then((d) => file.writeAsBytes(d));
+
+                // return Text('a');
+                return PdfPreview(build: (format) => pdf.save());
+                //Dashboard(data.data.data);
               }
               return Text('Bussje komt zo');
             }));
