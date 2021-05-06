@@ -3,17 +3,17 @@ import 'package:dojodash/screens/home/overview_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard(Key? key, this.data) : super(key: key);
+class OverviewDashboard extends StatefulWidget {
+  OverviewDashboard(Key? key, this.data) : super(key: key);
   final Map<String, dynamic> data;
 
   @override
-  DashboardState createState() =>
-      DashboardState(DashboardModel.fromJson((data)));
+  OverviewDashboardState createState() =>
+      OverviewDashboardState(DashboardModel.fromJson((data)));
 }
 
-class DashboardState extends State<Dashboard> {
-  DashboardState(this.data);
+class OverviewDashboardState extends State<OverviewDashboard> {
+  OverviewDashboardState(this.data);
   final DashboardModel data;
   final OverviewConverter converter = OverviewConverter();
 

@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
-import 'package:dojodash/screens/home/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:yeet/yeet.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
+import 'overview_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -44,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
             future: Dio().get('http://localhost:5000/dashboard'),
             builder: (_, data) {
               if (data.hasData) {
-                return Dashboard(Key('dashb'), data.data!.data);
+                return OverviewDashboard(Key('dashb'), data.data!.data);
               }
               return Center(child: Text('Loading the Data...'));
             }));
