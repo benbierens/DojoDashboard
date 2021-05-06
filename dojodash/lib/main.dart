@@ -10,12 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routeInformationParser: YeetInformationParser(),
         routerDelegate: YeeterDelegate(yeet: myRoutes),
         title: 'Public Virtual Async Coding-Dojo Dashboard Jonge!',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-        )
-    );
+        ));
   }
 }

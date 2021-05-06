@@ -35,7 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
               icon: Icon(Icons.home), onPressed: () => context.yeet('/')),
           IconButton(
-              icon: Icon(Icons.person), onPressed: () => context.yeet('/maze'))
+              icon: Icon(Icons.person), onPressed: () => context.yeet('/maze')),
+          IconButton(
+              icon: Icon(Icons.vpn_key), onPressed: () => context.yeet('/key'))
         ]),
         body: FutureBuilder<Response>(
             future: Dio().get('http://localhost:5000/dashboard'),

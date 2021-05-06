@@ -72,4 +72,11 @@ class KeyFoundModel {
 
   factory KeyFoundModel.fromJson(Map<String, dynamic> json) =>
       _$KeyFoundModelFromJson(json);
+
+  int getPlayDuration() {
+    return this.keyFoundUtc
+        .difference(this.playerStartUtc)
+        .inSeconds;
+  }
+
 }

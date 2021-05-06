@@ -20,16 +20,10 @@ class OverviewConverter {
     return 'Completed: $number - Fastest: $fastest steps';
   }
 
-  int getPlayDuration(KeyFoundModel keyFoundModel) {
-    return keyFoundModel.keyFoundUtc
-        .difference(keyFoundModel.playerStartUtc)
-        .inSeconds;
-  }
-
   String getKeyReport(List<KeyFoundModel>? keysFound) {
     if (keysFound == null || keysFound.length == 0) return "-";
     var number = keysFound.length;
-    var fastest = keysFound.map(getPlayDuration).reduce(min);
+    var fastest = keysFound.map((k) => k.getPlayDuration()).reduce(min);
     var kEntries = (keysFound
         .map((e) => e.numberOfEntriesEvaluated)
         .reduce((value, element) => element + value)) / 1000;
