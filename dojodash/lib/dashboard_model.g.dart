@@ -22,12 +22,20 @@ Map<String, dynamic> _$DashboardModelToJson(DashboardModel instance) =>
 TeamScoreModel _$TeamScoreModelFromJson(Map<String, dynamic> json) {
   return TeamScoreModel(
     TeamInfoModel.fromJson(json['teamInfo'] as Map<String, dynamic>),
+    (json['mazesCompleted'] as List<dynamic>)
+        .map((e) => MazeCompletedModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['keysFound'] as List<dynamic>)
+        .map((e) => KeyFoundModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$TeamScoreModelToJson(TeamScoreModel instance) =>
     <String, dynamic>{
       'teamInfo': instance.teamInfo,
+      'mazesCompleted': instance.mazesCompleted,
+      'keysFound': instance.keysFound,
     };
 
 TeamInfoModel _$TeamInfoModelFromJson(Map<String, dynamic> json) {
@@ -45,4 +53,38 @@ Map<String, dynamic> _$TeamInfoModelToJson(TeamInfoModel instance) =>
       'iconUrl': instance.iconUrl,
       'teamMembers': instance.teamMembers,
       'repositoryUrl': instance.repositoryUrl,
+    };
+
+MazeCompletedModel _$MazeCompletedModelFromJson(Map<String, dynamic> json) {
+  return MazeCompletedModel(
+    json['stepsTaken'] as int,
+    json['mazeSize'] as int,
+    json['numberOfHits'] as int,
+    json['numberOfTimesHit'] as int,
+    DateTime.parse(json['utc'] as String),
+  );
+}
+
+Map<String, dynamic> _$MazeCompletedModelToJson(MazeCompletedModel instance) =>
+    <String, dynamic>{
+      'stepsTaken': instance.stepsTaken,
+      'mazeSize': instance.mazeSize,
+      'numberOfHits': instance.numberOfHits,
+      'numberOfTimesHit': instance.numberOfTimesHit,
+      'utc': instance.utc.toIso8601String(),
+    };
+
+KeyFoundModel _$KeyFoundModelFromJson(Map<String, dynamic> json) {
+  return KeyFoundModel(
+    DateTime.parse(json['playerStartUtc'] as String),
+    DateTime.parse(json['keyFoundUtc'] as String),
+    json['numberOfEntriesEvaluated'] as int,
+  );
+}
+
+Map<String, dynamic> _$KeyFoundModelToJson(KeyFoundModel instance) =>
+    <String, dynamic>{
+      'playerStartUtc': instance.playerStartUtc.toIso8601String(),
+      'keyFoundUtc': instance.keyFoundUtc.toIso8601String(),
+      'numberOfEntriesEvaluated': instance.numberOfEntriesEvaluated,
     };
