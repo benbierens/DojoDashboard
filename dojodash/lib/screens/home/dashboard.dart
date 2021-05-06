@@ -1,7 +1,7 @@
 import 'package:dojodash/dashboard_model.dart';
+import 'package:dojodash/screens/home/overview_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'dart:convert';
 
 class Dashboard extends StatefulWidget {
   Dashboard(Key? key, this.data) : super(key: key);
@@ -15,96 +15,67 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   DashboardState(this.data);
   final DashboardModel data;
+  final OverviewConverter converter = OverviewConverter();
 
-  List<Employee> employees = <Employee>[];
-  late EmployeeDataSource employeeDataSource;
+  List<TeamInfoOverview> teamInfos = <TeamInfoOverview>[];
+  late TeamInfoOverviewDataSource teamInfoDataSource;
 
   @override
   void initState() {
     super.initState();
-    employees = getEmployeeData();
-    employeeDataSource = EmployeeDataSource(employeeData: employees);
-  }
-
-  List<Employee> getEmployeeData() {
-    //var firstName = data!['scores'][0]['teamInfo']['teamName'];
-    //[0].teamInfo.teamName;
-    var firstName = data.scores[0].teamInfo.teamName;
-
-    return [
-      Employee(10001, firstName, 'Project Lead',
-          'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.ifunny.com%2Fresults%2F2016%2F01%2F15%2Fxlxprckn64.jpg&f=1&nofb=1'),
-      Employee(10002, 'Kathryn', 'Manager',
-          'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.ifunny.com%2Fresults%2F2016%2F01%2F15%2Fxlxprckn64.jpg&f=1&nofb=1'),
-      Employee(10003, 'Lara', 'Developer',
-          'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.ifunny.com%2Fresults%2F2016%2F01%2F15%2Fxlxprckn64.jpg&f=1&nofb=1'),
-    ];
+    teamInfos = this.converter.getTeamInfoOverviewData(this.data);
+    teamInfoDataSource = TeamInfoOverviewDataSource(employeeData: teamInfos);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Syncfusion Flutter DataGrid'),
-      ),
-      body: SfDataGrid(
-        source: employeeDataSource,
-        columnWidthMode: ColumnWidthMode.fill,
-        columns: <GridColumn>[
-          GridTextColumn(
-              columnName: 'id',
-              label: Container(
-                  padding: EdgeInsets.all(16.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'ID',
-                  ))),
-          GridTextColumn(
-              columnName: 'name',
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text('Name'))),
-          GridTextColumn(
-              columnName: 'designation',
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Designation',
-                    overflow: TextOverflow.ellipsis,
-                  ))),
-          GridTextColumn(
-              columnName: 'icon',
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text('Icon'))),
-        ],
-      ),
+    return SfDataGrid(
+      source: teamInfoDataSource,
+      columnWidthMode: ColumnWidthMode.fill,
+      columns: <GridColumn>[
+        GridTextColumn(
+            columnName: 'teamName',
+            label: Container(
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.center,
+                child: Text(
+                  'Team Name',
+                ))),
+        GridTextColumn(
+            columnName: 'teamMembers',
+            label: Container(
+                padding: EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: Text('Team Members'))),
+        GridTextColumn(
+            columnName: 'maze',
+            label: Container(
+                padding: EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: Text(
+                  'Maze Puzzle',
+                  overflow: TextOverflow.ellipsis,
+                ))),
+        GridTextColumn(
+            columnName: 'key',
+            label: Container(
+                padding: EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: Text('Key Puzzle'))),
+      ],
     );
   }
 }
 
-class Employee {
-  Employee(this.id, this.name, this.designation, this.icon);
-
-  final int id;
-  final String? name;
-  final String designation;
-  final String icon;
-}
-
-class EmployeeDataSource extends DataGridSource {
-  EmployeeDataSource({required List<Employee> employeeData}) {
+class TeamInfoOverviewDataSource extends DataGridSource {
+  TeamInfoOverviewDataSource({required List<TeamInfoOverview> employeeData}) {
     _employeeData = employeeData
         .map<DataGridRow>((e) => DataGridRow(cells: [
-              DataGridCell<int>(columnName: 'id', value: e.id),
-              DataGridCell<String>(columnName: 'name', value: e.name),
+              DataGridCell<String>(columnName: 'teamName', value: e.teamName),
               DataGridCell<String>(
-                  columnName: 'designation', value: e.designation),
-              DataGridCell<Image>(
-                  columnName: 'salary', value: Image.network(e.icon))
+                  columnName: 'teamMembers', value: e.teamMembers),
+              DataGridCell<String>(columnName: 'maze', value: e.mazeReport),
+              DataGridCell<String>(columnName: 'key', value: e.keyReport)
             ]))
         .toList();
   }
