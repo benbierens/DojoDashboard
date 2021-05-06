@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yeet/yeet.dart';
 
 class MazePage extends StatelessWidget {
-  MazePage({Key key}) : super(key: key);
+  MazePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

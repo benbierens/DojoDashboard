@@ -10,7 +10,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
   final String title = 'Dojo Dashboard';
 
   @override
@@ -44,23 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
             future: Dio().get('http://localhost:5000/dashboard'),
             builder: (_, data) {
               if (data.hasData) {
-                final pdf = pw.Document();
-
-                pdf.addPage(pw.Page(
-                    pageFormat: PdfPageFormat.a4,
-                    build: (pw.Context context) {
-                      return pw.Center(
-                          child: pw.Text('Cheeseplease')); // Center
-                    })); // Page
-
-                // final file = File("matthijspdf.pdf");
-                // pdf.save().then((d) => file.writeAsBytes(d));
-
-                // return Text('a');
-                return PdfPreview(build: (format) => pdf.save());
-                //Dashboard(data.data.data);
+                return Dashboard(Key('dashb'), data.data!.data);
               }
-              return Text('Bussje komt zo');
+              return Center(child: Text('Loading the Data...'));
             }));
   }
 }
