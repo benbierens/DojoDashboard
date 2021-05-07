@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:yeet/yeet.dart';
+import '../action_buttons.dart';
 import 'maze_dashboard.dart';
 
 class MazePage extends StatelessWidget {
@@ -10,14 +10,7 @@ class MazePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.teal,
-        appBar: AppBar(title: Text('Maze'), actions: [
-          IconButton(
-              icon: Icon(Icons.home), onPressed: () => context.yeet('/')),
-          IconButton(
-              icon: Icon(Icons.person), onPressed: () => context.yeet('/maze')),
-          IconButton(
-              icon: Icon(Icons.vpn_key), onPressed: () => context.yeet('/key'))
-        ]),
+        appBar: AppBar(title: Text('Maze'), actions: getActionButtons(context)),
         body: FutureBuilder<Response>(
             future: Dio().get('http://localhost:5000/dashboard'),
             builder: (_, data) {

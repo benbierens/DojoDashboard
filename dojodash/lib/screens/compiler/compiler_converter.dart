@@ -29,7 +29,7 @@ class CompilerConverter {
   }
 
   DateTime mostRecent(List<DateTime> utcs) {
-    return utcs[0];
+    return utcs.reduce((value, element) => value.isAfter(element)? value : element);
   }
 
   int sum(int value, int element) {
