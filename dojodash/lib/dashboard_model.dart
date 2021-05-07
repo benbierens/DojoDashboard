@@ -17,12 +17,10 @@ class TeamScoreModel {
   TeamInfoModel teamInfo;
   List<MazeCompletedModel> mazesCompleted;
   List<KeyFoundModel> keysFound;
+  List<CompilerGameRunModel> compilerGameRuns;
 
-  TeamScoreModel(
-    this.teamInfo,
-    this.mazesCompleted,
-    this.keysFound
-  );
+  TeamScoreModel(this.teamInfo, this.mazesCompleted, this.keysFound,
+      this.compilerGameRuns);
 
   factory TeamScoreModel.fromJson(Map<String, dynamic> json) =>
       _$TeamScoreModelFromJson(json);
@@ -54,8 +52,8 @@ class MazeCompletedModel {
   int numberOfTimesHit;
   DateTime utc;
 
-  MazeCompletedModel(
-      this.stepsTaken, this.mazeSize, this.numberOfHits, this.numberOfTimesHit, this.utc);
+  MazeCompletedModel(this.stepsTaken, this.mazeSize, this.numberOfHits,
+      this.numberOfTimesHit, this.utc);
 
   factory MazeCompletedModel.fromJson(Map<String, dynamic> json) =>
       _$MazeCompletedModelFromJson(json);
@@ -74,9 +72,22 @@ class KeyFoundModel {
       _$KeyFoundModelFromJson(json);
 
   int getPlayDuration() {
-    return this.keyFoundUtc
-        .difference(this.playerStartUtc)
-        .inSeconds;
+    return this.keyFoundUtc.difference(this.playerStartUtc).inSeconds;
   }
+}
 
+@JsonSerializable()
+class CompilerGameRunModel {
+  DateTime utc;
+  int numberOfGames;
+  int totalCoinsSpent;
+  int totalCoinsReceived;
+  int totalNumberOfTurns;
+  int totalNumberOfWins;
+
+  CompilerGameRunModel(this.utc, this.numberOfGames, this.totalCoinsSpent,
+      this.totalCoinsReceived, this.totalNumberOfTurns, this.totalNumberOfWins);
+
+  factory CompilerGameRunModel.fromJson(Map<String, dynamic> json) =>
+      _$CompilerGameRunModelFromJson(json);
 }

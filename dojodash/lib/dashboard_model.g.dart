@@ -28,6 +28,9 @@ TeamScoreModel _$TeamScoreModelFromJson(Map<String, dynamic> json) {
     (json['keysFound'] as List<dynamic>)
         .map((e) => KeyFoundModel.fromJson(e as Map<String, dynamic>))
         .toList(),
+    (json['compilerGameRuns'] as List<dynamic>)
+        .map((e) => CompilerGameRunModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -36,6 +39,7 @@ Map<String, dynamic> _$TeamScoreModelToJson(TeamScoreModel instance) =>
       'teamInfo': instance.teamInfo,
       'mazesCompleted': instance.mazesCompleted,
       'keysFound': instance.keysFound,
+      'compilerGameRuns': instance.compilerGameRuns,
     };
 
 TeamInfoModel _$TeamInfoModelFromJson(Map<String, dynamic> json) {
@@ -87,4 +91,26 @@ Map<String, dynamic> _$KeyFoundModelToJson(KeyFoundModel instance) =>
       'playerStartUtc': instance.playerStartUtc.toIso8601String(),
       'keyFoundUtc': instance.keyFoundUtc.toIso8601String(),
       'numberOfEntriesEvaluated': instance.numberOfEntriesEvaluated,
+    };
+
+CompilerGameRunModel _$CompilerGameRunModelFromJson(Map<String, dynamic> json) {
+  return CompilerGameRunModel(
+    DateTime.parse(json['utc'] as String),
+    json['numberOfGames'] as int,
+    json['totalCoinsSpent'] as int,
+    json['totalCoinsReceived'] as int,
+    json['totalNumberOfTurns'] as int,
+    json['totalNumberOfWins'] as int,
+  );
+}
+
+Map<String, dynamic> _$CompilerGameRunModelToJson(
+        CompilerGameRunModel instance) =>
+    <String, dynamic>{
+      'utc': instance.utc.toIso8601String(),
+      'numberOfGames': instance.numberOfGames,
+      'totalCoinsSpent': instance.totalCoinsSpent,
+      'totalCoinsReceived': instance.totalCoinsReceived,
+      'totalNumberOfTurns': instance.totalNumberOfTurns,
+      'totalNumberOfWins': instance.totalNumberOfWins,
     };
