@@ -9,7 +9,7 @@ class CompilerConverter {
   CompilerInfo getCompilerInfo(TeamScoreModel t) {
     var teamName = t.teamInfo.teamName;
     if (t.compilerGameRuns == null || t.compilerGameRuns.length == 0) {
-      return CompilerInfo(teamName, "-", 0, 0, 0, 0, 0);
+      return CompilerInfo(teamName, "-", 0, 0, 0, 0, 0, 0.0, 0.0);
     }
 
     var utc = mostRecent(t.compilerGameRuns.map((c) => c.utc).toList())
@@ -22,7 +22,10 @@ class CompilerConverter {
         t.compilerGameRuns.map((e) => (e.totalNumberOfTurns)).reduce(sum);
     var wins = t.compilerGameRuns.map((e) => (e.totalNumberOfWins)).reduce(sum);
 
-    return CompilerInfo(teamName, utc, numGames, spent, received, turns, wins);
+    var spt = ratio(spent, turns);
+    var rpt = ratio(received, turns);
+
+    return CompilerInfo(teamName, utc, numGames, spent, received, turns, wins, spt, rpt);
   }
 
   DateTime mostRecent(List<DateTime> utcs) {
@@ -32,11 +35,23 @@ class CompilerConverter {
   int sum(int value, int element) {
     return value + element;
   }
+
+  double ratio(int num, int div) {
+    return num.toDouble() / div.toDouble();
+  }
 }
 
 class CompilerInfo {
-  CompilerInfo(this.teamName, this.utc, this.numberOfGames, this.totalSpent, this.totalReceived,
-      this.totalTurns, this.wins);
+  CompilerInfo(
+      this.teamName,
+      this.utc,
+      this.numberOfGames,
+      this.totalSpent,
+      this.totalReceived,
+      this.totalTurns,
+      this.wins,
+      this.spentPerTurn,
+      this.receivedPerTurn);
 
   final String teamName;
   final String utc;
@@ -45,4 +60,6 @@ class CompilerInfo {
   final int totalReceived;
   final int totalTurns;
   final int wins;
+  final double spentPerTurn;
+  final double receivedPerTurn;
 }

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
+import 'package:dojodash/screens/action_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:yeet/yeet.dart';
 import 'package:pdf/pdf.dart';
@@ -31,14 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.title), actions: [
-          IconButton(
-              icon: Icon(Icons.home), onPressed: () => context.yeet('/')),
-          IconButton(
-              icon: Icon(Icons.person), onPressed: () => context.yeet('/maze')),
-          IconButton(
-              icon: Icon(Icons.vpn_key), onPressed: () => context.yeet('/key'))
-        ]),
+        appBar: AppBar(title: Text(widget.title), actions: getActionButtons(context)),
         body: FutureBuilder<Response>(
             future: Dio().get('http://localhost:5000/dashboard'),
             builder: (_, data) {

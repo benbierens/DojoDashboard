@@ -83,6 +83,22 @@ class CompilerDashboardState extends State<CompilerDashboard> {
                   'Number of Turns Played',
                 ))),
         GridTextColumn(
+            columnName: 'spentPerTurn',
+            label: Container(
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.center,
+                child: Text(
+                  'Spent / Turn',
+                ))),
+        GridTextColumn(
+            columnName: 'receivedPerTurn',
+            label: Container(
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.center,
+                child: Text(
+                  'Received / Turn',
+                ))),
+        GridTextColumn(
             columnName: 'wins',
             label: Container(
                 padding: EdgeInsets.all(16.0),
@@ -107,6 +123,8 @@ class TeamInfoCompilerDataSource extends DataGridSource {
               DataGridCell<int>(
                   columnName: 'totalReceived', value: e.totalReceived),
               DataGridCell<int>(columnName: 'totalTurns', value: e.totalTurns),
+              DataGridCell<double>(columnName: 'spentPerTurn', value: e.spentPerTurn),
+              DataGridCell<double>(columnName: 'receivedPerTurn', value: e.receivedPerTurn),
               DataGridCell<int>(columnName: 'wins', value: e.wins)
             ]))
         .toList();
