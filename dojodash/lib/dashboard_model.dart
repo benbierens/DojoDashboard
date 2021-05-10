@@ -18,11 +18,7 @@ class TeamScoreModel {
   List<MazeCompletedModel> mazesCompleted;
   List<KeyFoundModel> keysFound;
 
-  TeamScoreModel(
-    this.teamInfo,
-    this.mazesCompleted,
-    this.keysFound
-  );
+  TeamScoreModel(this.teamInfo, this.mazesCompleted, this.keysFound);
 
   factory TeamScoreModel.fromJson(Map<String, dynamic> json) =>
       _$TeamScoreModelFromJson(json);
@@ -54,8 +50,8 @@ class MazeCompletedModel {
   int numberOfTimesHit;
   DateTime utc;
 
-  MazeCompletedModel(
-      this.stepsTaken, this.mazeSize, this.numberOfHits, this.numberOfTimesHit, this.utc);
+  MazeCompletedModel(this.stepsTaken, this.mazeSize, this.numberOfHits,
+      this.numberOfTimesHit, this.utc);
 
   factory MazeCompletedModel.fromJson(Map<String, dynamic> json) =>
       _$MazeCompletedModelFromJson(json);
@@ -74,9 +70,18 @@ class KeyFoundModel {
       _$KeyFoundModelFromJson(json);
 
   int getPlayDuration() {
-    return this.keyFoundUtc
-        .difference(this.playerStartUtc)
-        .inSeconds;
+    return this.keyFoundUtc.difference(this.playerStartUtc).inSeconds;
   }
+}
 
+@JsonSerializable()
+class MazeServerStatusResponse {
+  DateTime lastServerUpdateUtc;
+  int lastNumberOfPlayerMoves;
+
+  MazeServerStatusResponse(
+      this.lastNumberOfPlayerMoves, this.lastServerUpdateUtc);
+
+  factory MazeServerStatusResponse.fromJson(Map<String, dynamic> json) =>
+      _$MazeServerStatusResponseFromJson(json);
 }

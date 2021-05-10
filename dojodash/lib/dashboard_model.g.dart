@@ -88,3 +88,18 @@ Map<String, dynamic> _$KeyFoundModelToJson(KeyFoundModel instance) =>
       'keyFoundUtc': instance.keyFoundUtc.toIso8601String(),
       'numberOfEntriesEvaluated': instance.numberOfEntriesEvaluated,
     };
+
+MazeServerStatusResponse _$MazeServerStatusResponseFromJson(
+    Map<String, dynamic> json) {
+  return MazeServerStatusResponse(
+    json['lastNumberOfPlayerMoves'] as int,
+    DateTime.parse(json['lastServerUpdateUtc'] as String),
+  );
+}
+
+Map<String, dynamic> _$MazeServerStatusResponseToJson(
+        MazeServerStatusResponse instance) =>
+    <String, dynamic>{
+      'lastServerUpdateUtc': instance.lastServerUpdateUtc.toIso8601String(),
+      'lastNumberOfPlayerMoves': instance.lastNumberOfPlayerMoves,
+    };
