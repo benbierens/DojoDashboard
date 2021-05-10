@@ -5,11 +5,11 @@ import 'key_converter.dart';
 
 class KeyDashboard extends StatefulWidget {
   KeyDashboard(Key? key, this.data) : super(key: key);
-  final Map<String, dynamic> data;
+  final DashboardModel data;
 
   @override
   KeyDashboardState createState() =>
-      KeyDashboardState(DashboardModel.fromJson((data)));
+      KeyDashboardState(data);
 }
 
 class KeyDashboardState extends State<KeyDashboard> {
@@ -17,14 +17,14 @@ class KeyDashboardState extends State<KeyDashboard> {
   final DashboardModel data;
   final KeyConverter converter = KeyConverter();
 
-  List<KeyInfo> KeyInfos = <KeyInfo>[];
+  List<KeyInfo> keyInfos = <KeyInfo>[];
   late TeamInfoKeyDataSource teamInfoDataSource;
 
   @override
   void initState() {
     super.initState();
-    KeyInfos = this.converter.getTeamInfoKeyData(this.data);
-    teamInfoDataSource = TeamInfoKeyDataSource(employeeData: KeyInfos);
+    keyInfos = this.converter.getTeamInfoKeyData(this.data);
+    teamInfoDataSource = TeamInfoKeyDataSource(employeeData: keyInfos);
   }
 
   @override

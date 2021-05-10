@@ -5,11 +5,11 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class OverviewDashboard extends StatefulWidget {
   OverviewDashboard(Key? key, this.data) : super(key: key);
-  final Map<String, dynamic> data;
+  final DashboardModel data;
 
   @override
   OverviewDashboardState createState() =>
-      OverviewDashboardState(DashboardModel.fromJson((data)));
+      OverviewDashboardState(data);
 }
 
 class OverviewDashboardState extends State<OverviewDashboard> {
