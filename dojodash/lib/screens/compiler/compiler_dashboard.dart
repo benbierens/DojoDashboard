@@ -5,11 +5,10 @@ import 'Compiler_converter.dart';
 
 class CompilerDashboard extends StatefulWidget {
   CompilerDashboard(Key? key, this.data) : super(key: key);
-  final Map<String, dynamic> data;
+  final DashboardModel data;
 
   @override
-  CompilerDashboardState createState() =>
-      CompilerDashboardState(DashboardModel.fromJson((data)));
+  CompilerDashboardState createState() => CompilerDashboardState(data);
 }
 
 class CompilerDashboardState extends State<CompilerDashboard> {
@@ -123,8 +122,10 @@ class TeamInfoCompilerDataSource extends DataGridSource {
               DataGridCell<int>(
                   columnName: 'totalReceived', value: e.totalReceived),
               DataGridCell<int>(columnName: 'totalTurns', value: e.totalTurns),
-              DataGridCell<double>(columnName: 'spentPerTurn', value: e.spentPerTurn),
-              DataGridCell<double>(columnName: 'receivedPerTurn', value: e.receivedPerTurn),
+              DataGridCell<double>(
+                  columnName: 'spentPerTurn', value: e.spentPerTurn),
+              DataGridCell<double>(
+                  columnName: 'receivedPerTurn', value: e.receivedPerTurn),
               DataGridCell<int>(columnName: 'wins', value: e.wins)
             ]))
         .toList();

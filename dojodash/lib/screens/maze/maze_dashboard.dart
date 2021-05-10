@@ -5,11 +5,11 @@ import 'maze_converter.dart';
 
 class MazeDashboard extends StatefulWidget {
   MazeDashboard(Key? key, this.data) : super(key: key);
-  final Map<String, dynamic> data;
+  final DashboardModel data;
 
   @override
   MazeDashboardState createState() =>
-      MazeDashboardState(DashboardModel.fromJson((data)));
+      MazeDashboardState(data);
 }
 
 class MazeDashboardState extends State<MazeDashboard> {
