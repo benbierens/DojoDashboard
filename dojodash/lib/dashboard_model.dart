@@ -85,3 +85,24 @@ class MazeServerStatusResponse {
   factory MazeServerStatusResponse.fromJson(Map<String, dynamic> json) =>
       _$MazeServerStatusResponseFromJson(json);
 }
+
+@JsonSerializable()
+class KeyServerStatusResponse {
+  int currentKeyNumber;
+  List<String> playersJoined;
+  List<String> winners;
+  DateTime expiresUtc;
+  int maxNumberOfEntries;
+  int maxLineLength;
+
+  KeyServerStatusResponse(
+      this.currentKeyNumber,
+      this.playersJoined,
+      this.winners,
+      this.expiresUtc,
+      this.maxNumberOfEntries,
+      this.maxLineLength);
+
+  factory KeyServerStatusResponse.fromJson(Map<String, dynamic> json) =>
+      _$KeyServerStatusResponseFromJson(json);
+}

@@ -103,3 +103,26 @@ Map<String, dynamic> _$MazeServerStatusResponseToJson(
       'lastServerUpdateUtc': instance.lastServerUpdateUtc.toIso8601String(),
       'lastNumberOfPlayerMoves': instance.lastNumberOfPlayerMoves,
     };
+
+KeyServerStatusResponse _$KeyServerStatusResponseFromJson(
+    Map<String, dynamic> json) {
+  return KeyServerStatusResponse(
+    json['currentKeyNumber'] as int,
+    (json['playersJoined'] as List<dynamic>).map((e) => e as String).toList(),
+    (json['winners'] as List<dynamic>).map((e) => e as String).toList(),
+    DateTime.parse(json['expiresUtc'] as String),
+    json['maxNumberOfEntries'] as int,
+    json['maxLineLength'] as int,
+  );
+}
+
+Map<String, dynamic> _$KeyServerStatusResponseToJson(
+        KeyServerStatusResponse instance) =>
+    <String, dynamic>{
+      'currentKeyNumber': instance.currentKeyNumber,
+      'playersJoined': instance.playersJoined,
+      'winners': instance.winners,
+      'expiresUtc': instance.expiresUtc.toIso8601String(),
+      'maxNumberOfEntries': instance.maxNumberOfEntries,
+      'maxLineLength': instance.maxLineLength,
+    };

@@ -46,4 +46,9 @@ class DashboardEndpoint {
     return _onEndpointData(mazeStatusRenderer, 'dashboard/server',
         (map) => MazeServerStatusResponse.fromJson(map));
   }
+
+  StreamBuilder onKeyStatusData(Function keyStatusRenderer) {
+    return _onEndpointData(keyStatusRenderer, 'evaluate/status',
+        (map) => KeyServerStatusResponse.fromJson(map));
+  }
 }
