@@ -176,7 +176,6 @@ CompilerPlayerReportModel _$CompilerPlayerReportModelFromJson(
   return CompilerPlayerReportModel(
     json['playerId'] as String,
     json['playerName'] as String,
-    _$enumDecode(_$CompilerPlayerStatusEnumMap, json['status']),
     json['statusString'] as String,
     (json['gameRunReports'] as List<dynamic>)
         .map((e) => CompilerGameRunReport.fromJson(e as Map<String, dynamic>))
@@ -189,46 +188,9 @@ Map<String, dynamic> _$CompilerPlayerReportModelToJson(
     <String, dynamic>{
       'playerId': instance.playerId,
       'playerName': instance.playerName,
-      'status': _$CompilerPlayerStatusEnumMap[instance.status],
       'statusString': instance.statusString,
       'gameRunReports': instance.gameRunReports,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-const _$CompilerPlayerStatusEnumMap = {
-  CompilerPlayerStatus.WaitingForCompilerRun: 'WaitingForCompilerRun',
-  CompilerPlayerStatus.CompilerIsRunning: 'CompilerIsRunning',
-  CompilerPlayerStatus.FailedToCompile: 'FailedToCompile',
-  CompilerPlayerStatus.TurnFunctionDidntCallPlay: 'TurnFunctionDidntCallPlay',
-  CompilerPlayerStatus.CodeDidntReturn: 'CodeDidntReturn',
-  CompilerPlayerStatus.MemoryLeakDetected: 'MemoryLeakDetected',
-  CompilerPlayerStatus.CompiledAndExecuted: 'CompiledAndExecuted',
-};
 
 CompilerGameRunReport _$CompilerGameRunReportFromJson(
     Map<String, dynamic> json) {

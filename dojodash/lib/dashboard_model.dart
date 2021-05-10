@@ -140,12 +140,12 @@ class CompilerStatusResponse {
 class CompilerPlayerReportModel {
   String playerId;
   String playerName;
-  CompilerPlayerStatus status;
+  // CompilerPlayerStatus status;
   String statusString;
   // String buildOutput; Not parsed. May be long. Not desirable for dashboard viewing.
   List<CompilerGameRunReport> gameRunReports;
 
-  CompilerPlayerReportModel(this.playerId, this.playerName, this.status,
+  CompilerPlayerReportModel(this.playerId, this.playerName, 
       this.statusString, this.gameRunReports);
 
   factory CompilerPlayerReportModel.fromJson(Map<String, dynamic> json) =>
@@ -164,14 +164,4 @@ class CompilerGameRunReport {
 
   factory CompilerGameRunReport.fromJson(Map<String, dynamic> json) =>
       _$CompilerGameRunReportFromJson(json);
-}
-
-enum CompilerPlayerStatus {
-  WaitingForCompilerRun,
-  CompilerIsRunning,
-  FailedToCompile,
-  TurnFunctionDidntCallPlay,
-  CodeDidntReturn,
-  MemoryLeakDetected,
-  CompiledAndExecuted,
 }
