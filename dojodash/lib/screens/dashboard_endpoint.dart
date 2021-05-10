@@ -6,24 +6,26 @@ import '../dashboard_model.dart';
 class DashboardEndpoint {
   bool _running = true;
 
-  Stream<DashboardModel> _clock() async* {
+  Stream<dynamic> _clock(String url, Function jsonParser) async* {
     while (_running) {
-      var data = await fetchDashboardData();
+      var data = await _fetchDashboardData(url);
       if (data != null) {
-        yield DashboardModel.fromJson(data);
+        yield jsonParser(data);
       }
       await Future<void>.delayed(Duration(seconds: 10));
     }
   }
 
-  Future<dynamic> fetchDashboardData() async {
-    var result = await Dio().get('http://localhost:5000/dashboard');
+  Future<dynamic> _fetchDashboardData(String url) async {
+    var full = 'http://localhost:5000/$url';
+    var result = await Dio().get(full);
     return result.data;
   }
 
-  StreamBuilder onDashboardData(Function dashboardRenderer) {
+  StreamBuilder _onEndpointData(
+      Function renderMethod, String url, Function jsonParser) {
     return StreamBuilder(
-        stream: _clock(),
+        stream: _clock(url, jsonParser),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: Text('Loading the Data...'));
@@ -31,7 +33,22 @@ class DashboardEndpoint {
           if (snapshot.data == null) {
             return Center(child: Text('No data received yet...'));
           }
-          return dashboardRenderer(snapshot.data);
+          return renderMethod(snapshot.data);
         });
+  }
+
+  StreamBuilder onDashboardData(Function dashboardRenderer) {
+    return _onEndpointData(
+        dashboardRenderer, 'dashboard', (map) => DashboardModel.fromJson(map));
+  }
+
+  StreamBuilder onMazeStatusData(Function mazeStatusRenderer) {
+    return _onEndpointData(mazeStatusRenderer, 'dashboard/server',
+        (map) => MazeServerStatusResponse.fromJson(map));
+  }
+
+  StreamBuilder onKeyStatusData(Function keyStatusRenderer) {
+    return _onEndpointData(keyStatusRenderer, 'evaluate/status',
+        (map) => KeyServerStatusResponse.fromJson(map));
   }
 }
