@@ -51,4 +51,9 @@ class DashboardEndpoint {
     return _onEndpointData(keyStatusRenderer, 'evaluate/status',
         (map) => KeyServerStatusResponse.fromJson(map));
   }
+
+  StreamBuilder onCompilerStatusData(Function compilerStatusRenderer) {
+    return _onEndpointData(compilerStatusRenderer, 'compiler/status',
+        (map) => CompilerStatusResponse.fromJson(map));
+  }
 }
