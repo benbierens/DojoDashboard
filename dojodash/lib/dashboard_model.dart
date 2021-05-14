@@ -142,7 +142,8 @@ class CompilerPlayerReportModel {
   String playerName;
   // CompilerPlayerStatus status;
   String statusString;
-  // String buildOutput; Not parsed. May be long. Not desirable for dashboard viewing.
+  // String output; Not parsed. May be long. Not desirable for dashboard viewing.
+  // String errors; Not parsed. May be long. Not desirable for dashboard viewing.
   List<CompilerGameRunReport> gameRunReports;
 
   CompilerPlayerReportModel(this.playerId, this.playerName, 
