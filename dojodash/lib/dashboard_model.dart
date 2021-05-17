@@ -129,8 +129,10 @@ class KeyServerStatusResponse {
 class CompilerStatusResponse {
   List<CompilerPlayerReportModel> playerReports;
   DateTime latestCompilerRunUtc;
+  CompilerConfig config;
 
-  CompilerStatusResponse(this.playerReports, this.latestCompilerRunUtc);
+  CompilerStatusResponse(
+      this.playerReports, this.latestCompilerRunUtc, this.config);
 
   factory CompilerStatusResponse.fromJson(Map<String, dynamic> json) =>
       _$CompilerStatusResponseFromJson(json);
@@ -146,8 +148,8 @@ class CompilerPlayerReportModel {
   // String errors; Not parsed. May be long. Not desirable for dashboard viewing.
   List<CompilerGameRunReport> gameRunReports;
 
-  CompilerPlayerReportModel(this.playerId, this.playerName, 
-      this.statusString, this.gameRunReports);
+  CompilerPlayerReportModel(
+      this.playerId, this.playerName, this.statusString, this.gameRunReports);
 
   factory CompilerPlayerReportModel.fromJson(Map<String, dynamic> json) =>
       _$CompilerPlayerReportModelFromJson(json);
@@ -165,4 +167,25 @@ class CompilerGameRunReport {
 
   factory CompilerGameRunReport.fromJson(Map<String, dynamic> json) =>
       _$CompilerGameRunReportFromJson(json);
+}
+
+@JsonSerializable()
+class CompilerConfig {
+  int minPlayersPerRun;
+  int maxPlayersPerRun;
+  int maxWaitInMinutes;
+  int numberOfTurns;
+  int coopReward;
+  bool chanceOfFailure;
+
+  CompilerConfig(
+      this.minPlayersPerRun,
+      this.maxPlayersPerRun,
+      this.maxWaitInMinutes,
+      this.numberOfTurns,
+      this.coopReward,
+      this.chanceOfFailure);
+
+  factory CompilerConfig.fromJson(Map<String, dynamic> json) =>
+      _$CompilerConfigFromJson(json);
 }

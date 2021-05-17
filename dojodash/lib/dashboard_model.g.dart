@@ -161,6 +161,7 @@ CompilerStatusResponse _$CompilerStatusResponseFromJson(
             CompilerPlayerReportModel.fromJson(e as Map<String, dynamic>))
         .toList(),
     DateTime.parse(json['latestCompilerRunUtc'] as String),
+    CompilerConfig.fromJson(json['config'] as Map<String, dynamic>),
   );
 }
 
@@ -169,6 +170,7 @@ Map<String, dynamic> _$CompilerStatusResponseToJson(
     <String, dynamic>{
       'playerReports': instance.playerReports,
       'latestCompilerRunUtc': instance.latestCompilerRunUtc.toIso8601String(),
+      'config': instance.config,
     };
 
 CompilerPlayerReportModel _$CompilerPlayerReportModelFromJson(
@@ -209,4 +211,25 @@ Map<String, dynamic> _$CompilerGameRunReportToJson(
       'numberOfCoinsReceived': instance.numberOfCoinsReceived,
       'numberOfTurns': instance.numberOfTurns,
       'winner': instance.winner,
+    };
+
+CompilerConfig _$CompilerConfigFromJson(Map<String, dynamic> json) {
+  return CompilerConfig(
+    json['minPlayersPerRun'] as int,
+    json['maxPlayersPerRun'] as int,
+    json['maxWaitInMinutes'] as int,
+    json['numberOfTurns'] as int,
+    json['coopReward'] as int,
+    json['chanceOfFailure'] as bool,
+  );
+}
+
+Map<String, dynamic> _$CompilerConfigToJson(CompilerConfig instance) =>
+    <String, dynamic>{
+      'minPlayersPerRun': instance.minPlayersPerRun,
+      'maxPlayersPerRun': instance.maxPlayersPerRun,
+      'maxWaitInMinutes': instance.maxWaitInMinutes,
+      'numberOfTurns': instance.numberOfTurns,
+      'coopReward': instance.coopReward,
+      'chanceOfFailure': instance.chanceOfFailure,
     };

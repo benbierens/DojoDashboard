@@ -22,6 +22,11 @@ class CompilerServerPage extends StatelessWidget {
             title: Text('70s Compiler Server Status'),
             actions: getActionButtons(context)),
         body: CompilerServerDashboard(UniqueKey(), status),
-        bottomNavigationBar: Text('Last Compiler Run: ${status.latestCompilerRunUtc.toIso8601String()}'));
+        bottomNavigationBar: Text(formatBottomText(status)));
+  }
+
+  String formatBottomText(CompilerStatusResponse status) {
+    return 'Last Compiler Run: ${status.latestCompilerRunUtc.toIso8601String()}\n' +
+    'Number of turns: ${status.config.numberOfTurns} - Coop-reward: ${status.config.coopReward} - Chance of Failure: ${status.config.chanceOfFailure}';
   }
 }
