@@ -1,6 +1,8 @@
 import 'package:dojodash/dashboard_model.dart';
 import 'dart:math';
 
+import '../../utils.dart';
+
 class MazeConverter {
   List<MazeInfo> getTeamInfoMazeData(DashboardModel data) {
     return data.scores.map(getMazeInfo).toList();
@@ -9,7 +11,7 @@ class MazeConverter {
   MazeInfo getMazeInfo(TeamScoreModel t) {
     var teamName = t.teamInfo.teamName;
     if (t.mazesCompleted == null || t.mazesCompleted.length == 0) {
-      return MazeInfo(teamName, 0, 0, 0, 0, 0, 0, 0);
+      return MazeInfo(valueOrEmpty(teamName), 0, 0, 0, 0, 0, 0, 0);
     }
     var number = t.mazesCompleted.length;
     var maxSteps = t.mazesCompleted.map((m) => m.stepsTaken).reduce(max);
@@ -20,7 +22,7 @@ class MazeConverter {
     var maxTimesHit =
         t.mazesCompleted.map((m) => m.numberOfTimesHit).reduce(max);
 
-    return MazeInfo(teamName, number, maxSteps, minSteps, maxSize, minSize,
+    return MazeInfo(valueOrEmpty(teamName), number, maxSteps, minSteps, maxSize, minSize,
         maxHits, maxTimesHit);
   }
 }

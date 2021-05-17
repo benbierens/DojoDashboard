@@ -1,5 +1,6 @@
 import 'package:dojodash/dashboard_model.dart';
-import 'dart:math';
+
+import '../../utils.dart';
 
 class CompilerConverter {
   List<CompilerInfo> getCompilerData(DashboardModel data) {
@@ -9,7 +10,7 @@ class CompilerConverter {
   CompilerInfo getCompilerInfo(TeamScoreModel t) {
     var teamName = t.teamInfo.teamName;
     if (t.compilerGameRuns == null || t.compilerGameRuns.length == 0) {
-      return CompilerInfo(teamName, "-", 0, 0, 0, 0, 0, 0.0, 0.0);
+      return CompilerInfo(valueOrEmpty(teamName), "-", 0, 0, 0, 0, 0, 0.0, 0.0);
     }
 
     var utc = mostRecent(t.compilerGameRuns.map((c) => c.utc).toList())
@@ -25,7 +26,7 @@ class CompilerConverter {
     var spt = ratio(spent, turns);
     var rpt = ratio(received, turns);
 
-    return CompilerInfo(teamName, utc, numGames, spent, received, turns, wins, spt, rpt);
+    return CompilerInfo(valueOrEmpty(teamName), utc, numGames, spent, received, turns, wins, spt, rpt);
   }
 
   DateTime mostRecent(List<DateTime> utcs) {

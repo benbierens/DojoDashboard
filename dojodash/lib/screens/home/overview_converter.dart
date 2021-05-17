@@ -1,21 +1,18 @@
 import 'package:dojodash/dashboard_model.dart';
 import 'dart:math';
 
+import '../../utils.dart';
+
 class OverviewConverter {
   List<TeamInfoOverview> getTeamInfoOverviewData(DashboardModel data) {
     return data.scores
         .map((e) => TeamInfoOverview(
-            e.teamInfo.teamName,
+            valueOrEmpty(e.teamInfo.teamName),
             valueOrEmpty(e.teamInfo.teamMembers),
             getMazeReport(e.mazesCompleted),
             getKeyReport(e.keysFound),
             getCompilerReport(e.compilerGameRuns)))
         .toList();
-  }
-
-  String valueOrEmpty(String? s) {
-    if (s == null) return "";
-    return s;
   }
 
   String getMazeReport(List<MazeCompletedModel>? mazesCompleted) {
