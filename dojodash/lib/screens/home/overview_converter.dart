@@ -6,11 +6,16 @@ class OverviewConverter {
     return data.scores
         .map((e) => TeamInfoOverview(
             e.teamInfo.teamName,
-            e.teamInfo.teamMembers,
+            valueOrEmpty(e.teamInfo.teamMembers),
             getMazeReport(e.mazesCompleted),
             getKeyReport(e.keysFound),
             getCompilerReport(e.compilerGameRuns)))
         .toList();
+  }
+
+  String valueOrEmpty(String? s) {
+    if (s == null) return "";
+    return s;
   }
 
   String getMazeReport(List<MazeCompletedModel>? mazesCompleted) {

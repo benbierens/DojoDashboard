@@ -21,7 +21,7 @@ class DashboardEndpoint {
     var result = await Dio().get(full);
     return result.data;
   }
-
+  
   StreamBuilder _onEndpointData(
       Function renderMethod, String url, Function jsonParser) {
     return StreamBuilder(

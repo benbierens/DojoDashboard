@@ -29,9 +29,9 @@ class TeamScoreModel {
 @JsonSerializable()
 class TeamInfoModel {
   String teamName;
-  String iconUrl;
-  String teamMembers;
-  String repositoryUrl;
+  String? iconUrl;
+  String? teamMembers;
+  String? repositoryUrl;
 
   TeamInfoModel(
     this.teamName,

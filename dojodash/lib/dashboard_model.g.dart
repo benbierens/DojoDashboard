@@ -45,9 +45,9 @@ Map<String, dynamic> _$TeamScoreModelToJson(TeamScoreModel instance) =>
 TeamInfoModel _$TeamInfoModelFromJson(Map<String, dynamic> json) {
   return TeamInfoModel(
     json['teamName'] as String,
-    json['iconUrl'] as String,
-    json['teamMembers'] as String,
-    json['repositoryUrl'] as String,
+    json['iconUrl'] as String?,
+    json['teamMembers'] as String?,
+    json['repositoryUrl'] as String?,
   );
 }
 
