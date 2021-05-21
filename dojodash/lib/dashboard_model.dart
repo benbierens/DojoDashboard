@@ -144,12 +144,13 @@ class CompilerPlayerReportModel {
   String playerName;
   // CompilerPlayerStatus status;
   String statusString;
+  String language;
   // String output; Not parsed. May be long. Not desirable for dashboard viewing.
   // String errors; Not parsed. May be long. Not desirable for dashboard viewing.
   List<CompilerGameRunReport> gameRunReports;
 
   CompilerPlayerReportModel(
-      this.playerId, this.playerName, this.statusString, this.gameRunReports);
+      this.playerId, this.playerName, this.statusString, this.language, this.gameRunReports);
 
   factory CompilerPlayerReportModel.fromJson(Map<String, dynamic> json) =>
       _$CompilerPlayerReportModelFromJson(json);

@@ -179,6 +179,7 @@ CompilerPlayerReportModel _$CompilerPlayerReportModelFromJson(
     json['playerId'] as String,
     json['playerName'] as String,
     json['statusString'] as String,
+    json['language'] as String,
     (json['gameRunReports'] as List<dynamic>)
         .map((e) => CompilerGameRunReport.fromJson(e as Map<String, dynamic>))
         .toList(),
@@ -191,6 +192,7 @@ Map<String, dynamic> _$CompilerPlayerReportModelToJson(
       'playerId': instance.playerId,
       'playerName': instance.playerName,
       'statusString': instance.statusString,
+      'language': instance.language,
       'gameRunReports': instance.gameRunReports,
     };
 

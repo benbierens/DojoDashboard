@@ -59,6 +59,14 @@ class CompilerServerDashboardState extends State<CompilerServerDashboard> {
                   'Status',
                 ))),
         GridTextColumn(
+            columnName: 'language',
+            label: Container(
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.center,
+                child: Text(
+                  'Language',
+                ))),
+        GridTextColumn(
             columnName: 'gameReports',
             label: Container(
                 padding: EdgeInsets.all(16.0),
@@ -78,6 +86,7 @@ class CompilerStatusDataSource extends DataGridSource {
               DataGridCell<String>(columnName: 'playerId', value: e.playerId),
               DataGridCell<String>(columnName: 'playerName', value: e.playerName),
               DataGridCell<String>(columnName: 'statusString', value: e.statusString),
+              DataGridCell<String>(columnName: 'language', value: e.language),
               DataGridCell<String>(
                   columnName: 'gameReports', value: e.gameReports)
             ]))

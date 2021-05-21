@@ -17,16 +17,17 @@ class CompilerServerConverter {
     var reports = formatGameReports(c.gameRunReports);
 
     return CompilerServerInfo(
-        c.playerId, c.playerName, c.statusString, reports);
+        c.playerId, c.playerName, c.statusString, c.language, reports);
   }
 }
 
 class CompilerServerInfo {
-  CompilerServerInfo(this.playerId, this.playerName,
-      this.statusString, this.gameReports);
+  CompilerServerInfo(
+      this.playerId, this.playerName, this.statusString, this.language, this.gameReports);
 
   final String playerId;
   final String playerName;
   final String statusString;
+  final String language;
   final String gameReports;
 }
