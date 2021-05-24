@@ -58,22 +58,6 @@ class CompilerDashboardState extends State<CompilerDashboard> {
                   'Number of Games',
                 ))),
         GridTextColumn(
-            columnName: 'totalSpent',
-            label: Container(
-                padding: EdgeInsets.all(16.0),
-                alignment: Alignment.center,
-                child: Text(
-                  'Total Coins Spent',
-                ))),
-        GridTextColumn(
-            columnName: 'totalReceived',
-            label: Container(
-                padding: EdgeInsets.all(16.0),
-                alignment: Alignment.center,
-                child: Text(
-                  'Total Coins Received',
-                ))),
-        GridTextColumn(
             columnName: 'totalTurns',
             label: Container(
                 padding: EdgeInsets.all(16.0),
@@ -98,12 +82,12 @@ class CompilerDashboardState extends State<CompilerDashboard> {
                   'Received / Turn',
                 ))),
         GridTextColumn(
-            columnName: 'wins',
+            columnName: 'winsPerTurn',
             label: Container(
                 padding: EdgeInsets.all(16.0),
                 alignment: Alignment.center,
                 child: Text(
-                  'Number of Wins',
+                  'Wins / Turn',
                 )))
       ],
     );
@@ -118,15 +102,12 @@ class TeamInfoCompilerDataSource extends DataGridSource {
               DataGridCell<String>(columnName: 'utc', value: e.utc),
               DataGridCell<int>(
                   columnName: 'numberOfGames', value: e.numberOfGames),
-              DataGridCell<int>(columnName: 'totalSpent', value: e.totalSpent),
-              DataGridCell<int>(
-                  columnName: 'totalReceived', value: e.totalReceived),
               DataGridCell<int>(columnName: 'totalTurns', value: e.totalTurns),
               DataGridCell<double>(
                   columnName: 'spentPerTurn', value: e.spentPerTurn),
               DataGridCell<double>(
                   columnName: 'receivedPerTurn', value: e.receivedPerTurn),
-              DataGridCell<int>(columnName: 'wins', value: e.wins)
+              DataGridCell<double>(columnName: 'winsPerTurn', value: e.winsPerTurn)
             ]))
         .toList();
   }
