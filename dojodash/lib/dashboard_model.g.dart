@@ -220,7 +220,8 @@ CompilerConfig _$CompilerConfigFromJson(Map<String, dynamic> json) {
     json['minPlayersPerRun'] as int,
     json['maxPlayersPerRun'] as int,
     json['maxWaitInMinutes'] as int,
-    json['numberOfTurns'] as int,
+    json['minNumberOfTurns'] as int,
+    json['maxNumberOfTurns'] as int,
     json['coopReward'] as int,
     json['chanceOfFailure'] as bool,
   );
@@ -231,7 +232,8 @@ Map<String, dynamic> _$CompilerConfigToJson(CompilerConfig instance) =>
       'minPlayersPerRun': instance.minPlayersPerRun,
       'maxPlayersPerRun': instance.maxPlayersPerRun,
       'maxWaitInMinutes': instance.maxWaitInMinutes,
-      'numberOfTurns': instance.numberOfTurns,
+      'minNumberOfTurns': instance.minNumberOfTurns,
+      'maxNumberOfTurns': instance.maxNumberOfTurns,
       'coopReward': instance.coopReward,
       'chanceOfFailure': instance.chanceOfFailure,
     };

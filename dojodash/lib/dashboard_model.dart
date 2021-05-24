@@ -149,8 +149,8 @@ class CompilerPlayerReportModel {
   // String errors; Not parsed. May be long. Not desirable for dashboard viewing.
   List<CompilerGameRunReport> gameRunReports;
 
-  CompilerPlayerReportModel(
-      this.playerId, this.playerName, this.statusString, this.language, this.gameRunReports);
+  CompilerPlayerReportModel(this.playerId, this.playerName, this.statusString,
+      this.language, this.gameRunReports);
 
   factory CompilerPlayerReportModel.fromJson(Map<String, dynamic> json) =>
       _$CompilerPlayerReportModelFromJson(json);
@@ -175,7 +175,8 @@ class CompilerConfig {
   int minPlayersPerRun;
   int maxPlayersPerRun;
   int maxWaitInMinutes;
-  int numberOfTurns;
+  int minNumberOfTurns;
+  int maxNumberOfTurns;
   int coopReward;
   bool chanceOfFailure;
 
@@ -183,7 +184,8 @@ class CompilerConfig {
       this.minPlayersPerRun,
       this.maxPlayersPerRun,
       this.maxWaitInMinutes,
-      this.numberOfTurns,
+      this.minNumberOfTurns,
+      this.maxNumberOfTurns,
       this.coopReward,
       this.chanceOfFailure);
 
