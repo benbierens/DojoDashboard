@@ -27,6 +27,6 @@ class CompilerServerPage extends StatelessWidget {
 
   String formatBottomText(CompilerStatusResponse status) {
     return 'Last Compiler Run: ${status.latestCompilerRunUtc.toIso8601String()}\n' +
-    'Number of turns: ${status.config.minNumberOfTurns} / ${status.maxNumberOfTurns} - Coop-reward: ${status.config.coopReward} - Chance of Failure: ${status.config.chanceOfFailure}';
+    'Number of turns: ${status.config.minNumberOfTurns} / ${status.config.maxNumberOfTurns} - Coop-reward: ${status.config.coopReward} - Chance of Failure: ${status.config.chanceOfFailure}';
   }
 }
