@@ -6,7 +6,10 @@ class CompilerServerConverter {
   }
 
   String formatGameReport(CompilerGameRunReport report) {
-    return '[Spt:${report.numberOfCoinsSpent}/Rcv:${report.numberOfCoinsReceived}/Turns:${report.numberOfTurns}/Win:${report.winner ? 'Y' : 'N'}]';
+    var spt = ratio(report.numberOfCoinsSpent, report.numberOfTurns);
+    var rpt = ratio(report.numberOfCoinsReceived, report.numberOfTurns);
+    var turns = report.numberOfTurns;
+    return '[Spent/t:${spt} Rcv/t:${rpt} #Turns:${turns}]';
   }
 
   String formatGameReports(List<CompilerGameRunReport> reports) {
@@ -19,11 +22,15 @@ class CompilerServerConverter {
     return CompilerServerInfo(
         c.playerId, c.playerName, c.statusString, c.language, reports);
   }
+
+  double ratio(int num, int div) {
+    return num.toDouble() / div.toDouble();
+  }
 }
 
 class CompilerServerInfo {
-  CompilerServerInfo(
-      this.playerId, this.playerName, this.statusString, this.language, this.gameReports);
+  CompilerServerInfo(this.playerId, this.playerName, this.statusString,
+      this.language, this.gameReports);
 
   final String playerId;
   final String playerName;
