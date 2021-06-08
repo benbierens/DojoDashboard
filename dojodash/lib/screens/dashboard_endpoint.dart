@@ -17,7 +17,7 @@ class DashboardEndpoint {
   }
 
   Future<dynamic> _fetchDashboardData(String url) async {
-    var full = 'http://localhost:5000/$url';
+    var full = '$url';
     var result = await Dio().get(full);
     return result.data;
   }
