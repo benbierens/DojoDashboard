@@ -17,11 +17,11 @@ class DashboardEndpoint {
   }
 
   Future<dynamic> _fetchDashboardData(String url) async {
-    var full = 'http://localhost:5000/$url';
+    var full = '$url';
     var result = await Dio().get(full);
     return result.data;
   }
-
+  
   StreamBuilder _onEndpointData(
       Function renderMethod, String url, Function jsonParser) {
     return StreamBuilder(
@@ -50,5 +50,10 @@ class DashboardEndpoint {
   StreamBuilder onKeyStatusData(Function keyStatusRenderer) {
     return _onEndpointData(keyStatusRenderer, 'evaluate/status',
         (map) => KeyServerStatusResponse.fromJson(map));
+  }
+
+  StreamBuilder onCompilerStatusData(Function compilerStatusRenderer) {
+    return _onEndpointData(compilerStatusRenderer, 'compiler/status',
+        (map) => CompilerStatusResponse.fromJson(map));
   }
 }

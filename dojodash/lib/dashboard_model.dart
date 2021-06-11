@@ -17,8 +17,10 @@ class TeamScoreModel {
   TeamInfoModel teamInfo;
   List<MazeCompletedModel> mazesCompleted;
   List<KeyFoundModel> keysFound;
+  List<CompilerGameRunModel> compilerGameRuns;
 
-  TeamScoreModel(this.teamInfo, this.mazesCompleted, this.keysFound);
+  TeamScoreModel(this.teamInfo, this.mazesCompleted, this.keysFound,
+      this.compilerGameRuns);
 
   factory TeamScoreModel.fromJson(Map<String, dynamic> json) =>
       _$TeamScoreModelFromJson(json);
@@ -26,10 +28,10 @@ class TeamScoreModel {
 
 @JsonSerializable()
 class TeamInfoModel {
-  String teamName;
-  String iconUrl;
-  String teamMembers;
-  String repositoryUrl;
+  String? teamName;
+  String? iconUrl;
+  String? teamMembers;
+  String? repositoryUrl;
 
   TeamInfoModel(
     this.teamName,
@@ -75,6 +77,22 @@ class KeyFoundModel {
 }
 
 @JsonSerializable()
+class CompilerGameRunModel {
+  DateTime utc;
+  int numberOfGames;
+  int totalCoinsSpent;
+  int totalCoinsReceived;
+  int totalNumberOfTurns;
+  int totalNumberOfWins;
+
+  CompilerGameRunModel(this.utc, this.numberOfGames, this.totalCoinsSpent,
+      this.totalCoinsReceived, this.totalNumberOfTurns, this.totalNumberOfWins);
+
+  factory CompilerGameRunModel.fromJson(Map<String, dynamic> json) =>
+      _$CompilerGameRunModelFromJson(json);
+}
+
+@JsonSerializable()
 class MazeServerStatusResponse {
   DateTime lastServerUpdateUtc;
   int lastNumberOfPlayerMoves;
@@ -105,4 +123,72 @@ class KeyServerStatusResponse {
 
   factory KeyServerStatusResponse.fromJson(Map<String, dynamic> json) =>
       _$KeyServerStatusResponseFromJson(json);
+}
+
+@JsonSerializable()
+class CompilerStatusResponse {
+  List<CompilerPlayerReportModel> playerReports;
+  DateTime latestCompilerRunUtc;
+  CompilerConfig config;
+
+  CompilerStatusResponse(
+      this.playerReports, this.latestCompilerRunUtc, this.config);
+
+  factory CompilerStatusResponse.fromJson(Map<String, dynamic> json) =>
+      _$CompilerStatusResponseFromJson(json);
+}
+
+@JsonSerializable()
+class CompilerPlayerReportModel {
+  String playerId;
+  String playerName;
+  // CompilerPlayerStatus status;
+  String statusString;
+  String language;
+  // String output; Not parsed. May be long. Not desirable for dashboard viewing.
+  // String errors; Not parsed. May be long. Not desirable for dashboard viewing.
+  List<CompilerGameRunReport> gameRunReports;
+
+  CompilerPlayerReportModel(this.playerId, this.playerName, this.statusString,
+      this.language, this.gameRunReports);
+
+  factory CompilerPlayerReportModel.fromJson(Map<String, dynamic> json) =>
+      _$CompilerPlayerReportModelFromJson(json);
+}
+
+@JsonSerializable()
+class CompilerGameRunReport {
+  int numberOfCoinsSpent;
+  int numberOfCoinsReceived;
+  int numberOfTurns;
+  bool winner;
+
+  CompilerGameRunReport(this.numberOfCoinsSpent, this.numberOfCoinsReceived,
+      this.numberOfTurns, this.winner);
+
+  factory CompilerGameRunReport.fromJson(Map<String, dynamic> json) =>
+      _$CompilerGameRunReportFromJson(json);
+}
+
+@JsonSerializable()
+class CompilerConfig {
+  int minPlayersPerRun;
+  int maxPlayersPerRun;
+  int maxWaitInMinutes;
+  int minNumberOfTurns;
+  int maxNumberOfTurns;
+  int coopReward;
+  bool chanceOfFailure;
+
+  CompilerConfig(
+      this.minPlayersPerRun,
+      this.maxPlayersPerRun,
+      this.maxWaitInMinutes,
+      this.minNumberOfTurns,
+      this.maxNumberOfTurns,
+      this.coopReward,
+      this.chanceOfFailure);
+
+  factory CompilerConfig.fromJson(Map<String, dynamic> json) =>
+      _$CompilerConfigFromJson(json);
 }

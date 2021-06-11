@@ -8,5 +8,6 @@ List<Widget> getActionButtons(BuildContext context) {
     IconButton(
         icon: Icon(Icons.person), onPressed: () => context.yeet('/maze')),
     IconButton(icon: Icon(Icons.vpn_key), onPressed: () => context.yeet('/key')),
+    IconButton(icon: Icon(Icons.file_copy), onPressed: () => context.yeet('/compiler'))
   ];
 }

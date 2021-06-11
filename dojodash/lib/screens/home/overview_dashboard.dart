@@ -62,6 +62,12 @@ class OverviewDashboardState extends State<OverviewDashboard> {
                 padding: EdgeInsets.all(8.0),
                 alignment: Alignment.center,
                 child: Text('Key Puzzle'))),
+                 GridTextColumn(
+            columnName: 'compiler',
+            label: Container(
+                padding: EdgeInsets.all(8.0),
+                alignment: Alignment.center,
+                child: Text('Compiler Puzzle')))
       ],
     );
   }
@@ -75,7 +81,8 @@ class TeamInfoOverviewDataSource extends DataGridSource {
               DataGridCell<String>(
                   columnName: 'teamMembers', value: e.teamMembers),
               DataGridCell<String>(columnName: 'maze', value: e.mazeReport),
-              DataGridCell<String>(columnName: 'key', value: e.keyReport)
+              DataGridCell<String>(columnName: 'key', value: e.keyReport),
+              DataGridCell<String>(columnName: 'compiler', value: e.compilerReport)
             ]))
         .toList();
   }

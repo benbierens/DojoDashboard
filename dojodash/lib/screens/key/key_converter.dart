@@ -1,6 +1,8 @@
 import 'package:dojodash/dashboard_model.dart';
 import 'dart:math';
 
+import '../../utils.dart';
+
 class KeyConverter {
   List<KeyInfo> getTeamInfoKeyData(DashboardModel data) {
     return data.scores.map(getKeyInfo).toList();
@@ -9,7 +11,7 @@ class KeyConverter {
   KeyInfo getKeyInfo(TeamScoreModel t) {
     var teamName = t.teamInfo.teamName;
     if (t.keysFound == null || t.keysFound.length == 0) {
-      return KeyInfo(teamName, 0, 0, 0, 0, 0);
+      return KeyInfo(valueOrEmpty(teamName), 0, 0, 0, 0, 0);
     }
 
     var total = t.keysFound
@@ -23,7 +25,7 @@ class KeyConverter {
     var maxSeconds = t.keysFound.map((k) => k.getPlayDuration()).reduce(max);
 
     return KeyInfo(
-        teamName, total, minEntries, maxEntries, minSeconds, maxSeconds);
+        valueOrEmpty(teamName), total, minEntries, maxEntries, minSeconds, maxSeconds);
   }
 }
 
