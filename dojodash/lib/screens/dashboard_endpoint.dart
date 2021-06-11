@@ -17,11 +17,15 @@ class DashboardEndpoint {
   }
 
   Future<dynamic> _fetchDashboardData(String url) async {
-    var full = '$url';
-    var result = await Dio().get(full);
-    return result.data;
+    var full = 'https://dojomaze-api.maas.codes/$url';
+    try {
+      var result = await Dio().get(full);
+      return result.data;
+    } catch (e) {
+      print(e);
+    }
   }
-  
+
   StreamBuilder _onEndpointData(
       Function renderMethod, String url, Function jsonParser) {
     return StreamBuilder(
